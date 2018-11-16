@@ -1,0 +1,28 @@
+type Employee {
+  _id: ID!
+  email: String
+  name: String!
+  leads: [Project]
+  projects: [Project]
+}
+
+input EmployeeCreate {
+  _id: ID
+  email: String
+  name: String!
+}
+
+input QueryOnEmployee {
+  _id: ID
+  email: String
+  name: String
+}
+
+type Query {
+  getEmployee(skip: Int, limit: Int, where: QueryOnEmployee): [Employee]
+  getEmployeeCount(where: QueryOnEmployee): Int
+}
+
+type Mutation {
+  createEmployee(data: EmployeeCreate): Employee!
+}

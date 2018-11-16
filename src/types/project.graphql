@@ -1,0 +1,39 @@
+type Project {
+  _id: ID!
+  title: String!
+  description: String!
+  live: Boolean!
+  hours: Int
+  lead: Employee
+  members: [Employee]
+}
+
+input ProjectCreateInput {
+  _id: ID
+  title: String
+  description: String
+  live: Boolean
+  hours: Int
+  lead: String
+  members: [String]
+}
+
+input QueryOnProject {
+  _id: ID
+  title: String
+  description: String
+  live: Boolean
+  hours: Int
+  lead: String
+  members: [String]
+}
+
+type Query {
+  getProjects(skip: Int, limit: Int, where: QueryOnProject): [Project]
+  getProjectsCount(where: QueryOnProject): Int
+}
+
+type Mutation {
+  createProject(data: ProjectCreateInput): Project!
+  updateProject(where: QueryOnProject, data: ProjectCreateInput): Project!
+}
